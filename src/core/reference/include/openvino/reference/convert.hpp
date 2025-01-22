@@ -14,7 +14,7 @@
 #include "openvino/core/type/nf4.hpp"
 
 #if !defined(OS_CHROMEOS) && (defined(OPENVINO_ARCH_X86) || defined(OPENVINO_ARCH_X86_64))
-#    define OV_CORE_USE_XBYAK_JIT
+// #    define OV_CORE_USE_XBYAK_JIT
 #endif
 
 #if defined(OS_CHROMEOS) && defined(OPENVINO_ARCH_X86_64) && defined(HAVE_AVX2)
@@ -72,6 +72,8 @@ template <>
 void convert<float, float16>(const float* arg, float16* out, size_t count);
 template <>
 void convert<float, int8_t>(const float* arg, int8_t* out, size_t count);
+template <>
+void convert<float, uint8_t>(const float* arg, uint8_t* out, size_t count);
 template <>
 void convert<float16, int8_t>(const float16* arg, int8_t* out, size_t count);
 template <>

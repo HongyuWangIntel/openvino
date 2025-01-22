@@ -512,6 +512,16 @@ void convert<float, int8_t>(const float* arg, int8_t* out, size_t count) {
 }
 
 template <>
+void convert<float, uint8_t>(const float* arg, uint8_t* out, size_t count) {
+    std::cout << "!!!! f32 -> u8" << std::endl;
+    Converter<float, uint8_t>::apply<Clamp<float, uint8_t>>(arg, out, count);
+    // this version can cause exception as xbyak spec not defined 
+    // compile with commented L17 in convert.hpp 
+    // // #    define OV_CORE_USE_XBYAK_JIT
+    //convert_impl<Clamp<float, uint8_t>>(arg, out, count);
+}
+
+template <>
 void convert<float16, int8_t>(const float16* arg, int8_t* out, size_t count) {
     convert_impl<NoClamp>(arg, out, count);
 }
